@@ -9,14 +9,14 @@
     {
       "id": 0,
       "team_name": "Bot 1 Alg1",
-      "team_id": 0,
+      "team_id": 1,
       "game_id": 0,
       "side": "A"
     },
     {
       "id": 1,
       "team_name": "Bot 2 Alg1",
-      "team_id": 1,
+      "team_id": 2,
       "game_id": 0,
       "side": "B"
     }
@@ -42,13 +42,13 @@
     ],
     "craftsmen": [
       {
-        "id": "0",
+        "id": "1x",
         "side": "A",
         "x": 3,
         "y": 13
       },
       {
-        "id": "1",
+        "id": "2x",
         "side": "B",
         "x": 4,
         "y": 3
