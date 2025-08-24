@@ -7,7 +7,6 @@ from pydantic import EmailStr, BaseModel
 from app.core.security import create_access_token
 from app.schemas.sche_base import DataResponse
 from app.schemas.sche_token import Token
-from app.services.srv_user import UserService
 
 router = APIRouter()
 
@@ -19,7 +18,7 @@ class LoginRequest(BaseModel):
 
 @router.post('', response_model=DataResponse[Token])
 def login_access_token(form_data: LoginRequest):
-    user = UserService().authenticate(email=form_data.username, password=form_data.password)
+    user = None
     if not user:
         raise HTTPException(status_code=400, detail='Incorrect email or password')
     elif not user.is_active:

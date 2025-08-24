@@ -2,6 +2,7 @@ from typing import Optional, TypeVar, Generic
 from pydantic.generics import GenericModel
 
 from pydantic import BaseModel
+from humps import camelize
 
 T = TypeVar("T")
 
@@ -46,3 +47,13 @@ class MetadataSchema(BaseModel):
     current_page: int
     page_size: int
     total_items: int
+
+def to_camel(string):
+    return camelize(string)
+
+class MyFormBaseModel(BaseModel):
+    class Config:
+        alias_generator = to_camel
+        orm_mode = True
+        allow_population_by_field_name = True
+        use_enum_values = True

@@ -12,7 +12,7 @@ email-validator==1.1.2
 Faker==7.0.0
 fastapi==0.85.0
 FastAPI-SQLAlchemy==0.2.1
-greenlet==1.0.0
+greenlet>=3.0.3
 h11==0.12.0
 idna==2.10
 importlib-metadata==5.0.0
@@ -47,3 +47,5 @@ typing_extensions==4.4.0
 urllib3==1.26.4
 uvicorn==0.13.4
 zipp==3.9.0
+pyhumps==3.7.3
+mysql-connector-python

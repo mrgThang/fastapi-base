@@ -1,11 +1,7 @@
 from fastapi import HTTPException, Depends
 
-from app.models import User
-from app.services.srv_user import UserService
-
-
-def login_required(http_authorization_credentials=Depends(UserService().reusable_oauth2)):
-    return UserService().get_current_user(http_authorization_credentials)
+def login_required():
+    return True
 
 
 class PermissionRequired:
@@ -13,7 +9,7 @@ class PermissionRequired:
         self.user = None
         self.permissions = args
 
-    def __call__(self, user: User = Depends(login_required)):
+    def __call__(self):
         self.user = user
         if self.user.role not in self.permissions and self.permissions:
             raise HTTPException(status_code=400,
