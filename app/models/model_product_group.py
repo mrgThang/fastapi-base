@@ -4,4 +4,6 @@ from app.models.model_base import BareBaseModel
 
 
 class ProductGroup(BareBaseModel):
+    __tablename__ = "product_groups"
+
     name = Column(String(255))

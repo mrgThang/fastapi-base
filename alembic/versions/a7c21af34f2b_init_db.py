@@ -23,6 +23,7 @@ def upgrade():
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
+        sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
         sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.PrimaryKeyConstraint('id')
@@ -33,7 +34,8 @@ def upgrade():
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('created_at', sa.DateTime(), nullable=True),
         sa.Column('updated_at', sa.DateTime(), nullable=True),
-        sa.Column('name', sa.DateTime(), nullable=False),
+        sa.Column('is_active', sa.Boolean(), nullable=True),
+        sa.Column('name', sa.String(255), nullable=False),
         sa.Column('product_group_id', sa.Integer(), nullable=False),
         sa.Column('comment', sa.String(255), nullable=True),
         sa.Column('description', sa.Text(), nullable=True),
@@ -46,6 +48,9 @@ def upgrade():
     op.create_table(
         'category',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+        sa.Column('created_at', sa.DateTime(), nullable=True),
+        sa.Column('updated_at', sa.DateTime(), nullable=True),
+        sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
         sa.Column('parent_category_id', sa.Integer(), nullable=True),
         sa.PrimaryKeyConstraint('id')
@@ -54,6 +59,9 @@ def upgrade():
     op.create_table(
         'solution',
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+        sa.Column('created_at', sa.DateTime(), nullable=True),
+        sa.Column('updated_at', sa.DateTime(), nullable=True),
+        sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
         sa.Column('description', sa.Text(), nullable=False)
     )
@@ -61,3 +69,5 @@ def upgrade():
 def downgrade():
     op.drop_table('product_group')
     op.drop_table('product')
+    op.drop_table('category')
+    op.drop_table('solution')

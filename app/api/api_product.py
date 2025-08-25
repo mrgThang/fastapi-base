@@ -26,7 +26,7 @@ def post(req: UpsertProductReq) -> Any:
     except Exception as e:
         return HTTPException(status_code=400, detail=logger.error(e))
 
-@router.get(":id", response_model=DataResponse)
+@router.get("/{id}", response_model=DataResponse)
 def get(id: int) -> Any:
     try:
         return DataResponse().success_response(data=Service().get_product_detail(id))
