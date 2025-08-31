@@ -10,6 +10,7 @@ class ProductGroupRespObject(MyFormBaseModel):
 class UpsertProductGroupReq(MyFormBaseModel):
     id: Optional[int]
     name: str
+    is_active: Optional[bool]
 
 class GetProductsReq(MyFormBaseModel):
     child_category_ids: Optional[list[int]]
@@ -40,6 +41,7 @@ class UpsertProductReq(MyFormBaseModel):
     detail_info: str
     child_category_ids: Optional[list[int]]
     product_group_id: int
+    is_active: Optional[bool]
 
 class SolutionObjectResp(MyFormBaseModel):
     id: int
@@ -54,13 +56,20 @@ class UpsertSolutionReq(MyFormBaseModel):
     id: Optional[int]
     name: str
     description: str
+    is_active: Optional[bool]
+
+class GetCategoriesReq(MyFormBaseModel):
+    product_group_id: int
 
 class CategoryObjectResp(MyFormBaseModel):
     id: int
     name: str
     parent_category_id: Optional[int]
+    product_group_id: int
 
 class UpsertCategoryReq(MyFormBaseModel):
     id: Optional[int]
     name: str
     parent_category_id: Optional[int]
+    product_group_id: int
+    is_active: Optional[bool]

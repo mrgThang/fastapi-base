@@ -26,7 +26,8 @@ def upgrade():
         sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
         sa.Column('is_active', sa.Boolean(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('name')
     )
 
     op.create_table(
@@ -42,7 +43,8 @@ def upgrade():
         sa.Column('detail_info', sa.Text(), nullable=True),
         sa.Column('images', sa.JSON(), nullable=True),
         sa.Column('child_category_ids', sa.JSON(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('name')
     )
 
     op.create_table(
@@ -53,7 +55,9 @@ def upgrade():
         sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
         sa.Column('parent_category_id', sa.Integer(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.Column('product_group_id', sa.Integer(), nullable=False),
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('name')
     )
 
     op.create_table(
@@ -63,7 +67,9 @@ def upgrade():
         sa.Column('updated_at', sa.DateTime(), nullable=True),
         sa.Column('is_active', sa.Boolean(), nullable=True),
         sa.Column('name', sa.String(255), nullable=False),
-        sa.Column('description', sa.Text(), nullable=False)
+        sa.Column('description', sa.Text(), nullable=False),
+        sa.PrimaryKeyConstraint('id'),
+        sa.UniqueConstraint('name')
     )
 
 def downgrade():
