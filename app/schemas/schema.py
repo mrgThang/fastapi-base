@@ -73,3 +73,6 @@ class UpsertCategoryReq(MyFormBaseModel):
     parent_category_id: Optional[int]
     product_group_id: int
     is_active: Optional[bool]
+
+class UploadFileResp(MyFormBaseModel):
+    filename: str

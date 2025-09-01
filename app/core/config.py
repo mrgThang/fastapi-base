@@ -16,5 +16,10 @@ class Settings(BaseSettings):
     SECURITY_ALGORITHM = 'HS256'
     LOGGING_CONFIG_FILE = os.path.join(BASE_DIR, 'logging.ini')
 
+    AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY', '')
+    AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY', '')
+    AWS_REGION = os.getenv('AWS_REGION', '')
+    AWS_BUCKET_NAME = os.getenv('AWS_BUCKET_NAME', '')
+    MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT', '')
 
 settings = Settings()
