@@ -21,13 +21,17 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
-      - name: Deploy to Server 1
+      - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: Create .env file
+        run: |
+          cat > ${{ secrets.TARGET_DIR }}/.env <<EOL
           PROJECT_NAME: ${{ env.PROJECT_NAME }}
           SECRET_KEY: ${{ env.SECRET_KEY }}
           SQL_DATABASE_URL: ${{ secrets.SQL_DATABASE_URL }}
@@ -36,3 +40,4 @@ jobs:
           AWS_REGION: ${{ env.AWS_REGION }}
           AWS_BUCKET_NAME: ${{ env.AWS_BUCKET_NAME }}
           ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          EOL
