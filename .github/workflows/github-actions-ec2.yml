@@ -21,6 +21,20 @@ jobs:
       - name: Checkout the files
         uses: actions/checkout@v2
 
+      - name: Create .env file
+        run: |
+          ls
+          touch .env
+          echo PROJECT_NAME = ${{ env.PROJECT_NAME }} >> .env
+          echo SECRET_KEY = ${{ env.SECRET_KEY }} >> .env
+          echo SQL_DATABASE_URL = ${{ secrets.SQL_DATABASE_URL }} >> .env
+          echo AWS_ACCESS_KEY = ${{ secrets.AWS_ACCESS_KEY }} >> .env
+          echo AWS_SECRET_KEY = ${{ secrets.AWS_SECRET_KEY }} >> .env
+          echo AWS_REGION = ${{ env.AWS_REGION }} >> .env
+          echo AWS_BUCKET_NAME = ${{ env.AWS_BUCKET_NAME }} >> .env
+          echo ENVIRONMENT = ${{ env.ENVIRONMENT }} >> .env
+          cat .env
+
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -28,19 +42,3 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-
-      - name: Create .env file
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << 'EOF'
-            cat > .env <<EOL
-              PROJECT_NAME=NEWSUN API
-              SECRET_KEY=123456
-              SQL_DATABASE_URL=${{ secrets.SQL_DATABASE_URL }}
-              AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}
-              AWS_SECRET_KEY=${{ secrets.AWS_SECRET_KEY }}
-              AWS_REGION=eu-north-1
-              AWS_BUCKET_NAME=newsun-bucket
-              ENVIRONMENT=production
-            EOL
-              cat .env
-          EOF
