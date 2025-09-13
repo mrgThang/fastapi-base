@@ -24,7 +24,7 @@ def download_file(filename: str) -> Any:
             "s3",
             aws_access_key_id=settings.AWS_ACCESS_KEY,
             aws_secret_access_key=settings.AWS_SECRET_KEY,
-            endpoint_url=settings.MINIO_ENDPOINT,
+            endpoint_url=settings.MINIO_ENDPOINT if settings.ENVIRONMENT == 'development' else None,
             region_name=settings.AWS_REGION,
         )
 
@@ -56,7 +56,7 @@ async def upload_file(file: UploadFile):
             "s3",
             aws_access_key_id=settings.AWS_ACCESS_KEY,
             aws_secret_access_key=settings.AWS_SECRET_KEY,
-            endpoint_url=settings.MINIO_ENDPOINT,
+            endpoint_url=settings.MINIO_ENDPOINT if settings.ENVIRONMENT == 'development' else None,
             region_name=settings.AWS_REGION,
         )
 

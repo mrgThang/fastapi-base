@@ -10,6 +10,12 @@ jobs:
   deploy:
     name: Deploy to EC2 on master branch push
     runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: NEWSUN API
+      SECRET_KEY: 123456
+      AWS_REGION: eu-north-1
+      AWS_BUCKET_NAME: newsun-bucket
+      ENVIRONMENT: production
 
     steps:
       - name: Checkout the files
@@ -22,3 +28,11 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          SECRET_KEY: ${{ env.SECRET_KEY }}
+          SQL_DATABASE_URL: ${{ secrets.SQL_DATABASE_URL }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: ${{ env.AWS_REGION }}
+          AWS_BUCKET_NAME: ${{ env.AWS_BUCKET_NAME }}
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}

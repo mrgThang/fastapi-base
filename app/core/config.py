@@ -22,4 +22,6 @@ class Settings(BaseSettings):
     AWS_BUCKET_NAME = os.getenv('AWS_BUCKET_NAME', '')
     MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT', '')
 
+    ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+
 settings = Settings()
