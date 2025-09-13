@@ -35,16 +35,16 @@ jobs:
           echo ENVIRONMENT = ${{ env.ENVIRONMENT }} >> .env
           cat .env
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            ls
-            docker build -t fastapi-app .
-            docker stop fastapi-container || true
-            docker rm fastapi-container || true
-            docker run -d -p 8000:8000 --name fastapi-container fastapi-app
-            sudo systemctl restart nginx
+#      - name: Deploy to EC2
+#        uses: appleboy/ssh-action@v0.1.6
+#        with:
+#          host: ${{ secrets.HOST_DNS }}
+#          username: ${{ secrets.USERNAME }}
+#          key: ${{ secrets.EC2_SSH_KEY }}
+#          script: |
+#            cd home
+#            docker build -t fastapi-app .
+#            docker stop fastapi-container || true
+#            docker rm fastapi-container || true
+#            docker run -d -p 8000:8000 --name fastapi-container fastapi-app
+#            sudo systemctl restart nginx
