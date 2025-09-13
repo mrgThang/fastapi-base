@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd home
+            ls
             docker build -t fastapi-app .
             docker stop fastapi-container || true
             docker rm fastapi-container || true
