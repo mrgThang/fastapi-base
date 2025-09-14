@@ -24,7 +24,7 @@ class Settings(BaseSettings):
 
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
-    USERNAME = os.getenv('USERNAME', '')
-    PASSWORD = os.getenv('PASSWORD', '')
+    APP_USERNAME = os.getenv('APP_USERNAME', '')
+    APP_PASSWORD = os.getenv('APP_PASSWORD', '')
 
 settings = Settings()
