@@ -33,6 +33,8 @@ jobs:
           echo AWS_REGION = ${{ env.AWS_REGION }} >> .env
           echo AWS_BUCKET_NAME = ${{ env.AWS_BUCKET_NAME }} >> .env
           echo ENVIRONMENT = ${{ env.ENVIRONMENT }} >> .env
+          echo APP_USERNAME = ${{ secrets.APP_USERNAME }} >> .env
+          echo APP_PASSWORD = ${{ secrets.APP_PASSWORD }} >> .env
           cat .env
 
       - name: Deploy to Server

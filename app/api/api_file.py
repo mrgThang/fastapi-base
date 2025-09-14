@@ -6,10 +6,11 @@ from typing import Any
 
 import boto3
 from botocore.exceptions import ClientError
-from fastapi import APIRouter, HTTPException, UploadFile
+from fastapi import APIRouter, HTTPException, UploadFile, Depends
 from starlette.responses import StreamingResponse
 
 from app.core.config import settings
+from app.core.security import login_required
 from app.schemas.sche_base import DataResponse
 from app.schemas.schema import UploadFileResp
 
@@ -49,7 +50,7 @@ def download_file(filename: str) -> Any:
     except Exception as e:
         raise HTTPException(status_code=400, detail=logger.error(e))
 
-@router.post("/upload/")
+@router.post("/upload/", dependencies=[Depends(login_required)])
 async def upload_file(file: UploadFile):
     try:
         s3_client = boto3.client(

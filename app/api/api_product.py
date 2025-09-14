@@ -4,6 +4,7 @@ from typing import Any, Optional
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.params import Query
 
+from app.core.security import login_required
 from app.schemas.sche_base import DataResponse
 from app.schemas.schema import GetProductsReq, UpsertProductReq
 from app.services.service import Service
@@ -23,7 +24,7 @@ def get(childCategoryIds: Optional[list[int]] = Query(default=[]), productGroupI
     except Exception as e:
         raise HTTPException(status_code=400, detail=logger.error(e))
 
-@router.post("")
+@router.post("", dependencies=[Depends(login_required)])
 def post(req: UpsertProductReq) -> Any:
     try:
         Service().upsert_product(req)

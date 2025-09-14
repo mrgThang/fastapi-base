@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     API_PREFIX = ''
     BACKEND_CORS_ORIGINS = ['*']
     DATABASE_URL = os.getenv('SQL_DATABASE_URL', '')
-    ACCESS_TOKEN_EXPIRE_SECONDS: int = 60 * 60 * 24 * 7  # Token expired after 7 days
+    ACCESS_TOKEN_EXPIRE_SECONDS: int = 60 * 60  # Token expired after 1 hour
     SECURITY_ALGORITHM = 'HS256'
     LOGGING_CONFIG_FILE = os.path.join(BASE_DIR, 'logging.ini')
 
@@ -23,5 +23,8 @@ class Settings(BaseSettings):
     MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT', '')
 
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
+
+    USERNAME = os.getenv('USERNAME', '')
+    PASSWORD = os.getenv('PASSWORD', '')
 
 settings = Settings()
