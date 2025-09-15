@@ -19,7 +19,7 @@ class GetProductsReq(MyFormBaseModel):
 class ProductRespObject(MyFormBaseModel):
     id: int
     name: str
-    image: str
+    image: Optional[str]
     comment: Optional[str]
 
 class GetProductDetailResp(MyFormBaseModel):

@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post('', response_model=DataResponse[Token])
 def login_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    if form_data.username != settings.USERNAME or form_data.password != settings.PASSWORD:
+    if form_data.username != settings.APP_USERNAME or form_data.password != settings.APP_PASSWORD:
         raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     return DataResponse().success_response({

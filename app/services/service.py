@@ -45,7 +45,7 @@ class Service:
             products_resp.append(ProductRespObject(
                 id=product.id,
                 name=product.name,
-                image=product.images[0],
+                image=product.images[0] if len(product.images) > 0 else None,
                 comment=product.comment,
             ))
         return products_resp
