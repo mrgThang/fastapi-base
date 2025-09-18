@@ -68,9 +68,7 @@ class Service:
             db.session.add(product)
             db.session.commit()
         else:
-            product = db.session.query(Product).filter_by(name=req.name).first()
-            if product is None:
-                product = Product()
+            product = Product()
             product.is_active = True
             product.name = req.name
             product.comment = req.comment
@@ -99,9 +97,7 @@ class Service:
             db.session.add(solution)
             db.session.commit()
         else:
-            solution = db.session.query(Solution).filter_by(name=req.name).first()
-            if not solution:
-                solution = Solution()
+            solution = Solution()
             solution.is_active = True
             solution.name = req.name
             solution.description = req.description
@@ -122,9 +118,7 @@ class Service:
             db.session.add(category)
             db.session.commit()
         else:
-            category = db.session.query(Category).filter_by(name=req.name).first()
-            if category is None:
-                category = Category()
+            category = Category()
             category.is_active = True
             category.name = req.name
             category.product_group_id = req.product_group_id

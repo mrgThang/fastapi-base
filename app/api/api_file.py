@@ -50,7 +50,7 @@ def download_file(filename: str) -> Any:
     except Exception as e:
         raise HTTPException(status_code=400, detail=logger.error(e))
 
-@router.post("/upload/", dependencies=[Depends(login_required)])
+@router.post("/upload", dependencies=[Depends(login_required)])
 async def upload_file(file: UploadFile):
     try:
         s3_client = boto3.client(
