@@ -3,6 +3,7 @@ import json
 from fastapi_sqlalchemy import db
 from pydantic.tools import parse_obj_as
 from sqlalchemy import func
+from sqlalchemy.dialects.postgresql import JSONB
 
 from app.models import Product, Solution, Category
 from app.models.model_product_group import ProductGroup
@@ -38,12 +39,12 @@ class Service:
             Product.is_active != False,
         )
         if req.child_category_ids and len(req.child_category_ids) > 0:
-            query = query.filter(func.json_contains(Product.child_category_ids, json.dumps(req.child_category_ids)) == 1)
+            query = query.filter(Product.child_category_ids.cast(JSONB).contains(req.child_category_ids))
         products = query.all()
         products_resp = []
         for product in products:
             products_resp.append(ProductRespObject(
-                id=product.id,
+                id=product.id, 
                 name=product.name,
                 image=product.images[0] if len(product.images) > 0 else None,
                 comment=product.comment,
